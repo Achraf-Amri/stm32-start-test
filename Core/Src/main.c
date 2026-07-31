@@ -223,6 +223,7 @@ void Error_Handler(void)
   __disable_irq();
   while (1)
   {
+	HAL_UART_Transmit(&huart1, (uint8_t*)"OK\r\n", 4, 100);
   }
   /* USER CODE END Error_Handler_Debug */
 }
