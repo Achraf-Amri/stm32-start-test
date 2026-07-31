@@ -1,0 +1,11 @@
+:project:
+  :build_root: build/ceedling
+  :test_file_prefix: test_
+
+:paths:
+  :source:
+    - src/**
+  :test:
+    - test/**
+  :include:
+    - src/**
