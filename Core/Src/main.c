@@ -18,6 +18,8 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "led_logic.h"
+
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -98,8 +100,11 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+	 int temperature = 25; // valeur simulee pour l'instant, capteur reel viendrait ici
+         int delay = get_blink_delay_ms(temperature);
 	HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
-        HAL_Delay(500);
+        HAL_Delay(delay);
+//	HAL_Delay(get_blink_delay_ms(temperature_simulee));
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
