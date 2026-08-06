@@ -1,0 +1,75 @@
+ARM GAS  /tmp/cc5A8OzH.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"led_logic.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "Core/Src/led_logic.c"
+  20              		.section	.text.get_blink_delay_ms,"ax",%progbits
+  21              		.align	1
+  22              		.global	get_blink_delay_ms
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	get_blink_delay_ms:
+  28              	.LVL0:
+  29              	.LFB0:
+   1:Core/Src/led_logic.c **** int get_blink_delay_ms(int temperature) {
+  30              		.loc 1 1 41 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		@ link register save eliminated.
+   2:Core/Src/led_logic.c ****     if (temperature > 30) {
+  35              		.loc 1 2 5 view .LVU1
+  36              		.loc 1 2 8 is_stmt 0 view .LVU2
+  37 0000 1E28     		cmp	r0, #30
+  38 0002 01DD     		ble	.L3
+   3:Core/Src/led_logic.c ****         return 100;
+  39              		.loc 1 3 16 view .LVU3
+  40 0004 6420     		movs	r0, #100
+  41              	.LVL1:
+  42              		.loc 1 3 16 view .LVU4
+  43 0006 7047     		bx	lr
+  44              	.LVL2:
+  45              	.L3:
+   4:Core/Src/led_logic.c ****     } else {
+   5:Core/Src/led_logic.c ****         return 500;
+  46              		.loc 1 5 16 view .LVU5
+  47 0008 4FF4FA70 		mov	r0, #500
+  48              	.LVL3:
+   6:Core/Src/led_logic.c ****     }
+   7:Core/Src/led_logic.c **** }
+  49              		.loc 1 7 1 view .LVU6
+  50 000c 7047     		bx	lr
+  51              		.cfi_endproc
+ARM GAS  /tmp/cc5A8OzH.s 			page 2
+
+
+  52              	.LFE0:
+  54              		.text
+  55              	.Letext0:
+ARM GAS  /tmp/cc5A8OzH.s 			page 3
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 led_logic.c
+     /tmp/cc5A8OzH.s:21     .text.get_blink_delay_ms:00000000 $t
+     /tmp/cc5A8OzH.s:27     .text.get_blink_delay_ms:00000000 get_blink_delay_ms
+
+NO UNDEFINED SYMBOLS

@@ -92,7 +92,7 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-	HAL_UART_Transmit(&huart2, (uint8_t*)"B000OOT_OK\r\n", 9, 100);
+	HAL_UART_Transmit(&huart2, (uint8_t*)"B000OOT_OK\r\n", 12, 100);
 
   /* USER CODE END 2 */
 
@@ -105,6 +105,8 @@ int main(void)
          int delay = get_blink_delay_ms(temperature);
 	HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
         HAL_Delay(delay);
+//HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+//HAL_Delay(500);
 //	HAL_Delay(get_blink_delay_ms(temperature_simulee));
     /* USER CODE BEGIN 3 */
   }
@@ -123,7 +125,7 @@ void SystemClock_Config(void)
   /** Configure the main internal regulator output voltage
   */
   __HAL_RCC_PWR_CLK_ENABLE();
-  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
+  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
@@ -235,6 +237,9 @@ void Error_Handler(void)
   __disable_irq();
   while (1)
   {
+	 HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+    for (volatile int i = 0; i < 200000; i++); 
+
   }
   /* USER CODE END Error_Handler_Debug */
 }
