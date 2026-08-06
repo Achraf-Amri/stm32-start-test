@@ -92,6 +92,7 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
+	HAL_UART_Transmit(&huart2, (uint8_t*)"BOOT_OK\r\n", 9, 100);
 
   /* USER CODE END 2 */
 
