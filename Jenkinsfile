@@ -53,3 +53,17 @@ pipeline {
         }
     }
 }
+post {
+        success {
+            mail to: 'achraf.amri@enicar.ucar.tn',
+                 subject: "Build ${env.BUILD_NUMBER} - SUCCES",
+                 body: "Le firmware a ete compile, teste et versionne avec succes.\nVoir : ${env.BUILD_URL}"
+            slackSend(channel: '#new-channel', color: 'good', message: "Build ${env.BUILD_NUMBER} reussi - firmware pret : ${env.BUILD_URL}")
+        }
+        failure {
+            mail to: 'achraf.amri@enicar.ucar.tn',
+                 subject: "Build ${env.BUILD_NUMBER} - ECHEC",
+                 body: "Le pipeline a echoue. Voir les logs : ${env.BUILD_URL}console"
+            slackSend(channel: '#new-channel', color: 'danger', message: "Build ${env.BUILD_NUMBER} echoue - voir ${env.BUILD_URL}console")
+        }
+    }
