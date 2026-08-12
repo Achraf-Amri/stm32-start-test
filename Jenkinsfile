@@ -29,6 +29,11 @@ pipeline {
                 sh 'docker run --rm -u $(id -u):$(id -g) -v $(pwd):/project $DOCKER_IMAGE sh -c "make clean && make"'
             }
         }
+        stage('Flash + HIL Test') {
+            steps {
+                sh 'python3 hil_tests/test_uart_response.py'
+             }
+        }
         stage('Version Artifacts') {
             steps {
                 script {

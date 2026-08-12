@@ -3,14 +3,16 @@ import subprocess
 import time
 import sys
 
-def test_uart_response(port='/dev/ttyACM0', baudrate=115200, timeout=5):
+def test_uart_response(port='/dev/ttyACM0', baudrate=115200, timeout=5,
+                        firmware_path='build/Start_test.bin'):
+    # Ouvrir le port AVANT le flash, pour capturer le boot immediat
     ser = serial.Serial(port, baudrate, timeout=timeout)
     ser.reset_input_buffer()
-    
-    # Forcer un vrai reset matériel via SWD (fiable, contrairement au DTR)
-    subprocess.run(["st-flash", "reset"], check=True)
-    
-    time.sleep(2.5)  # laisser le temps au firmware de redemarrer et transmettre
+
+    # Le flash lui-meme relance l'execution ("Go to Thumb mode")
+    subprocess.run(["st-flash", "write", firmware_path, "0x8000000"], check=True)
+
+    time.sleep(1.5)
     response = ser.readline().decode('utf-8', errors='ignore').strip()
     ser.close()
     print(f"Reponse recue : '{response}'")
