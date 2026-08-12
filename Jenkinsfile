@@ -52,7 +52,7 @@ pipeline {
             }
         }
     }
-}
+
 post {
         success {
             mail to: 'achraf.amri@enicar.ucar.tn',
@@ -67,3 +67,4 @@ post {
             slackSend(channel: '#new-channel', color: 'danger', message: "Build ${env.BUILD_NUMBER} echoue - voir ${env.BUILD_URL}console")
         }
     }
+}
