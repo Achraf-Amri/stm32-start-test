@@ -1,17 +1,14 @@
 import serial
+import subprocess
 import time
 import sys
 
 def test_uart_response(port='/dev/ttyACM0', baudrate=115200, timeout=5):
     ser = serial.Serial(port, baudrate, timeout=timeout)
+    ser.reset_input_buffer()
     
-    # Forcer un reset matériel de la carte via DTR
-    ser.setDTR(False)
-    time.sleep(0.2)
-    ser.setDTR(True)
-    
-    time.sleep(0.1)
-    ser.reset_input_buffer()  # vider le bruit electrique du reset lui-meme, AVANT le vrai message
+    # Forcer un vrai reset matériel via SWD (fiable, contrairement au DTR)
+    subprocess.run(["st-flash", "reset"], check=True)
     
     time.sleep(2.5)  # laisser le temps au firmware de redemarrer et transmettre
     response = ser.readline().decode('utf-8', errors='ignore').strip()
