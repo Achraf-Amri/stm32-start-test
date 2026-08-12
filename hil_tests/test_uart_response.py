@@ -10,9 +10,10 @@ def test_uart_response(port='/dev/ttyACM0', baudrate=115200, timeout=5):
     time.sleep(0.2)
     ser.setDTR(True)
     
-    time.sleep(2.5)  # laisser le temps au firmware de redemarrer
-    ser.reset_input_buffer()  # vider tout bruit residuel du reset
+    time.sleep(0.1)
+    ser.reset_input_buffer()  # vider le bruit electrique du reset lui-meme, AVANT le vrai message
     
+    time.sleep(2.5)  # laisser le temps au firmware de redemarrer et transmettre
     response = ser.readline().decode('utf-8', errors='ignore').strip()
     ser.close()
     print(f"Reponse recue : '{response}'")
