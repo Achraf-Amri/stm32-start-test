@@ -29,10 +29,16 @@ pipeline {
                 sh 'docker run --rm -u $(id -u):$(id -g) -v $(pwd):/project $DOCKER_IMAGE sh -c "make clean && make"'
             }
         }
-        stage('Flash + HIL Test') {
+        stage('Wireless Flash (ESP32)') {
+            steps {
+                sh 'python3 esp32_ota/scripts/send_firmware.py build/Start_test.bin $ESP32_URL'
+            }
+        }
+
+        stage('HIL Test') {
             steps {
                 sh 'python3 hil_tests/test_uart_response.py'
-             }
+            }
         }
         stage('Version Artifacts') {
             steps {
