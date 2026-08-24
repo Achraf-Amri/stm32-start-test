@@ -31,7 +31,7 @@ pipeline {
         }
         stage('Wireless Flash (ESP32)') {
     steps {
-        sh 'python3 esp32_ota/scripts/send_firmware.py build/tart_test.bin http://192.168.0.145/flash'
+        sh 'python3 esp32_ota/scripts/send_firmware.py build/Start_test.bin http://192.168.0.145/flash'
     }
 }
 
