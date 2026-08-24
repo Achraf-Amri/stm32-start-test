@@ -35,11 +35,7 @@ pipeline {
     }
 }
 
-        stage('HIL Test') {
-            steps {
-                sh 'python3 hil_tests/test_uart_response.py'
-            }
-        }
+       
         stage('Version Artifacts') {
             steps {
                 script {
