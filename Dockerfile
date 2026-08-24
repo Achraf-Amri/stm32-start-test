@@ -1,6 +1,9 @@
 FROM ubuntu:24.04
 
-RUN apt update && apt install -y \
+# Empêche les blocages interactifs (ex: configuration de la zone horaire tzdata)
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     make \
     git \
@@ -8,11 +11,11 @@ RUN apt update && apt install -y \
     ruby-full \
     python3 \
     python3-pip \
+    python3-esptool \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-RUN gem install ceedling --no-document \
-    && pip3 install --break-system-packages esptool
+RUN gem install ceedling --no-document
 
 WORKDIR /project
 COPY . .
