@@ -101,7 +101,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	 int temperature = 20; // valeur simulee pour l'instant, capteur reel viendrait ici
+	 int temperature = 45; // valeur simulee pour l'instant, capteur reel viendrait ici
          int delay = get_blink_delay_ms(temperature);
 	HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
         HAL_Delay(delay);
