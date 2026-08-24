@@ -1,15 +1,13 @@
 FROM ubuntu:24.04
-RUN apt update && apt install -y \
-    build-essential \
-    gcc-arm-none-eabi \
-    make \
-    git \
-    cppcheck \
-    ruby-full \
-    && rm -rf /var/lib/apt/lists/*
 
-RUN gem install ceedling --no-document
+# Évite que l'installation ne bloque en attendant une saisie clavier (tzdata)
+ENV DEBIAN_FRONTEND=noninteractive
 
-WORKDIR /project
-COPY . .
-CMD ["make"]
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    gcc-arm-none-eabi \
+    make \
+    git \
+    cppcheck \
+    ruby-full \
+    && rm -rf /var/lib/apt/lists/*
